@@ -49,7 +49,7 @@ export default function ShiritoriGame() {
   function handleTimeout() {
     setScores((prev) => ({
       ...prev,
-      [currentPlayer]: prev[currentPlayer] - 1, // Deduct 2 points for timeout
+      [currentPlayer]: prev[currentPlayer] - 2, // Deduct 2 points for timeout
     }));
     startNewTurn(otherPlayer);
   }
