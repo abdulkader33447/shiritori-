@@ -7,6 +7,7 @@ export default function WordInput({
   error,
   loading,
   words,
+  word,
 }) {
   // Checking if the current input is already used
   const isWordUsed =
@@ -38,6 +39,7 @@ export default function WordInput({
             isWordUsed ? "text-red-500" : ""
           }`}
           autoFocus
+          required
           disabled={loading}
         />
         <div className=" gap-2">
@@ -54,11 +56,7 @@ export default function WordInput({
           </button>
         </div>
       </form>
-      {error && (
-        <div className="mb-4 text-sm text-red-600 border border-red-200 rounded-xl p-2">
-          {error}
-        </div>
-      )}
+      {error && <div className="mb-4 text-sm text-red-600 ">{error}</div>}
       {isWordUsed && <div className="mb-4 text-sm text-red-500 ">Used</div>}
     </>
   );

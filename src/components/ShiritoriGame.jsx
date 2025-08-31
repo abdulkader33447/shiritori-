@@ -6,7 +6,7 @@ import WordHistory from "./WordHistory";
 import RulesFooter from "./RulesFooter";
 import { alphaHead, alphaTail } from "../utils/utils";
 
-const TIMER_SECONDS = 30;
+const TIMER_SECONDS = 32;
 
 export default function ShiritoriGame() {
   const [players, setPlayers] = useState(["Player 1", "Player 2"]);
@@ -49,7 +49,7 @@ export default function ShiritoriGame() {
   function handleTimeout() {
     setScores((prev) => ({
       ...prev,
-      [currentPlayer]: prev[currentPlayer] - 2, // Deduct 2 points for timeout
+      [currentPlayer]: prev[currentPlayer] - 1, // Deduct 2 points for timeout
     }));
     startNewTurn(otherPlayer);
   }
@@ -115,12 +115,12 @@ export default function ShiritoriGame() {
     setLoading(false);
 
     if (!dictOk) {
-      setError("Not a valid English word (DictionaryAPI)");
-      setScores((prev) => ({
-        ...prev,
-        [currentPlayer]: prev[currentPlayer] - 2, // Deduct 2 points for invalid dictionary word
-      }));
-      startNewTurn(otherPlayer);
+      setError("Not a valid English word ");
+      // setScores((prev) => ({
+      //   ...prev,
+      //   [currentPlayer]: prev[currentPlayer] - 2, // Deduct 2 points for invalid dictionary word
+      // }));
+      // startNewTurn(otherPlayer);
       return;
     }
 
@@ -129,7 +129,7 @@ export default function ShiritoriGame() {
     setRequiredStart(tail);
     setScores((prev) => ({
       ...prev,
-      [currentPlayer]: prev[currentPlayer] + 1,
+      [currentPlayer]: prev[currentPlayer] + 2,
     }));
     startNewTurn(otherPlayer);
   }
@@ -182,7 +182,8 @@ export default function ShiritoriGame() {
           onSkip={handleSkip}
           error={error}
           loading={loading}
-          words={words} 
+          words={words}
+          word
         />
 
         <WordHistory words={words} />
