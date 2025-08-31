@@ -6,7 +6,7 @@ import WordHistory from "./WordHistory";
 import RulesFooter from "./RulesFooter";
 import { alphaHead, alphaTail } from "../utils/utils";
 
-const TIMER_SECONDS = 32;
+const TIMER_SECONDS = 30;
 
 export default function ShiritoriGame() {
   const [players, setPlayers] = useState(["Player 1", "Player 2"]);
@@ -151,7 +151,7 @@ export default function ShiritoriGame() {
       <div className="w-full max-w-3xl shadow-2xl rounded-2xl sm:p-6 p-3">
         <header className="flex items-center justify-between gap-2 mb-6">
           <h1 className="text-2xl font-bold">
-            Multiplayer Shiritori (Word game)
+            English Shiritori (Word game)
           </h1>
           <button
             className="cursor-pointer px-4 py-2 rounded-xl text-white bg-blue-600 hover:bg-blue-700 transition duration-300"
