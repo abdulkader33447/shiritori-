@@ -7,7 +7,6 @@ export default function WordInput({
   error,
   loading,
   words,
-  word,
 }) {
   // Checking if the current input is already used
   const isWordUsed =
@@ -17,8 +16,7 @@ export default function WordInput({
     <>
       <form
         onSubmit={onSubmit}
-        className="flex sm:flex-row flex-col items-stretch gap-2 mb-3"
-      >
+        className="flex sm:flex-row flex-col items-stretch gap-2 mb-3">
         <button
           type="button"
           onClick={onSkip}
@@ -27,8 +25,7 @@ export default function WordInput({
             loading
               ? "bg-gray-300"
               : "bg-gray-600 hover:bg-gray-700 transition duration-500"
-          }`}
-        >
+          }`}>
           Skip (-1)
         </button>
         <input
@@ -50,8 +47,7 @@ export default function WordInput({
               loading
                 ? "bg-blue-300"
                 : "bg-blue-600 hover:bg-blue-700 transition duration-500"
-            }`}
-          >
+            }`}>
             {loading ? "Checking..." : "Submit"}
           </button>
         </div>

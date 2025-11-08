@@ -1,7 +1,7 @@
 export default function RulesFooter() {
   return (
-    <footer className="mt-6 text-xs">
-      <h1>Rules</h1>
+    <footer className="mt-6">
+      <h1 className="font-semibold text-blue-400">Rules</h1>
       <li>The first player will say an English word.</li>
       <li>
         The next player must say a new English word using the last letter of

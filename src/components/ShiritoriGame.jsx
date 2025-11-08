@@ -213,7 +213,7 @@ export default function ShiritoriGame() {
 
         {meaning && (
           <div className="text-center mt-3 text-lg">
-            <span className="font-semibold text-blue-500">Meaning: </span>
+            <span className="font-semibold text-blue-400">Meaning: </span>
             {meaning}
           </div>
         )}
