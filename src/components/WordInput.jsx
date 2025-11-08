@@ -39,14 +39,14 @@ export default function WordInput({
           required
           disabled={loading}
         />
-        <div className=" gap-2">
+        <div className="gap-2">
           <button
             type="submit"
             disabled={loading}
-            className={`cursor-pointer px-4 w-full py-2 rounded-xl text-white ${
+            className={`px-4 w-full py-2 rounded-xl text-white ${
               loading
-                ? "bg-blue-300"
-                : "bg-blue-600 hover:bg-blue-700 transition duration-500"
+                ? "bg-blue-300 cursor-not-allowed" // cursor disabled
+                : "bg-blue-600 hover:bg-blue-700 transition duration-500 cursor-pointer"
             }`}>
             {loading ? "Checking..." : "Submit"}
           </button>
