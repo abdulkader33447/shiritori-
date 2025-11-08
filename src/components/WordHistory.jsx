@@ -7,10 +7,7 @@ export default function WordHistory({ words }) {
       ) : (
         <div className="flex flex-wrap gap-2">
           {words.map((w, idx) => (
-            <span
-              key={w + idx}
-              className="px-3 py-1 rounded-full text-sm"
-            >
+            <span key={w + idx} className="px-3 py-1 rounded-full text-sm">
               {w}
             </span>
           ))}

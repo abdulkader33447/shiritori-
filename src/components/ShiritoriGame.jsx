@@ -17,6 +17,7 @@ export default function ShiritoriGame() {
   const [input, setInput] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [meaning, setMeaning] = useState("");
   const [secondsLeft, setSecondsLeft] = useState(TIMER_SECONDS);
   const intervalRef = useRef(null);
 
@@ -95,6 +96,20 @@ export default function ShiritoriGame() {
     }
   }
 
+  async function getBanglaMeaning(word) {
+    try {
+      const res = await fetch(
+        `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=bn&dt=t&q=${encodeURIComponent(
+          word
+        )}`
+      );
+      const data = await res.json();
+      return data[0][0][0];
+    } catch (e) {
+      return "Meaning not found";
+    }
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
     if (loading) return;
@@ -114,6 +129,16 @@ export default function ShiritoriGame() {
     const dictOk = await isValidDictionaryWord(word);
     setLoading(false);
 
+    // if (!dictOk) {
+    //   setError("Not a valid English word");
+    //   setScores((prev) => ({
+    //     ...prev,
+    //     [currentPlayer]: prev[currentPlayer] - 2, // Deduct 2 points for invalid word
+    //   }));
+    //   startNewTurn(otherPlayer);
+    //   return;
+    // }
+
     if (!dictOk) {
       setError("Not a valid English word ");
       // setScores((prev) => ({
@@ -124,8 +149,11 @@ export default function ShiritoriGame() {
       return;
     }
 
+    const bangla = await getBanglaMeaning(word);
+    setMeaning(bangla);
+
     const tail = alphaTail(word);
-    setWords((w) => [...w, word]);
+    setWords((w) => [word, ...w]); // New word always on top
     setRequiredStart(tail);
     setScores((prev) => ({
       ...prev,
@@ -150,13 +178,10 @@ export default function ShiritoriGame() {
     <div className="w-full flex items-center justify-center sm:p-4">
       <div className="w-full max-w-3xl shadow-2xl rounded-2xl sm:p-6 p-3">
         <header className="flex items-center justify-between gap-2 mb-6">
-          <h1 className="text-2xl font-bold">
-            English Shiritori (Word game)
-          </h1>
+          <h1 className="text-2xl font-bold">English Shiritori (Word game)</h1>
           <button
             className="cursor-pointer px-4 py-2 rounded-xl text-white bg-blue-600 hover:bg-blue-700 transition duration-300"
-            onClick={handleResetGame}
-          >
+            onClick={handleResetGame}>
             Reset
           </button>
         </header>
@@ -186,6 +211,12 @@ export default function ShiritoriGame() {
           word
         />
 
+        {meaning && (
+          <div className="text-center mt-3 text-lg">
+            <span className="font-semibold text-blue-500">Meaning: </span>
+            {meaning}
+          </div>
+        )}
         <WordHistory words={words} />
 
         <RulesFooter />
